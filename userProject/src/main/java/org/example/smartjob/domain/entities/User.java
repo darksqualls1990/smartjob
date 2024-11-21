@@ -9,11 +9,11 @@ import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "user")
+@Table(name = "tbl_user")
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Column(nullable = false)
@@ -25,10 +25,8 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @ElementCollection // Para listas simples dentro de la entidad
-    @CollectionTable(name = "user_phones", joinColumns = @JoinColumn(name = "user_id"))
-    @Column(name = "phone")
-    private List<String> phones;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Phone> phones;
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime created;
@@ -48,7 +46,7 @@ public class User {
     @PrePersist
     protected void onCreate() {
         this.created = LocalDateTime.now();
-        this.modified = LocalDateTime.now();
+        this.lastLogin=LocalDateTime.now();
     }
 
     @PreUpdate
