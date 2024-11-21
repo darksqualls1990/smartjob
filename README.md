@@ -90,3 +90,74 @@ Inicia la aplicación con el siguiente comando:
 ```bash
 mvn spring-boot:run
 ```
+
+### 5. Acceso a la consola de H2 (opcional)
+Puedes acceder a la consola de la base de datos H2 en:
+
+```bash
+http://localhost:8080/h2-console
+```
+Usa las siguientes credenciales:
+
+URL JDBC: jdbc:h2:mem:testdb
+Usuario: sa
+Contraseña:
+
+### 6. Documentación de la API
+Accede a la documentación interactiva de Swagger en:
+
+```bash
+http://localhost:8080/swagger-ui/index.html
+```
+
+## Estructura de archivos
+
+El proyecto incluye las siguientes carpetas en la raíz:
+
+### 1. Carpeta `sql`
+Contiene los scripts necesarios para configurar la base de datos.
+
+- `sql/DDL_ScriptSmartJob.sql`: Script para crear el modelo de base de datos.
+
+### 2. Carpeta `diagrama_solucion`
+Incluye el diagrama de la solución propuesta.
+
+- `diagrama_solucion/Diagrama_de_componente.jpg`: Diagrama de componentes del sistema.
+
+## Pruebas
+El proyecto incluye pruebas unitarias implementadas con JUnit y Mockito.
+
+Para ejecutar las pruebas, utiliza el siguiente comando:
+
+```bash
+mvn test
+```
+
+## Ejemplo de uso de la API
+
+### Registro de usuario
+
+Puedes realizar una petición al endpoint de registro de usuario con el siguiente comando `curl`:
+
+```bash
+curl --location 'http://localhost:8080/users/register' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Juan Rodriguez",
+    "email": "juan@odriguez.org",
+    "password": "HRamirez-1990",
+    "phones": [
+        {
+        "number": "1234567",
+        "citycode": "1",
+        "contrycode": "57"
+        },
+        {
+        "number": "3175555324",
+        "citycode": "1",
+        "contrycode": "57"
+        }
+    ]
+}'
+
+```
